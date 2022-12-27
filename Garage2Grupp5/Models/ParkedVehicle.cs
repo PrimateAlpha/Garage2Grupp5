@@ -21,7 +21,7 @@ namespace Garage2Grupp5.Models
 
         public string Color { get; set; } = string.Empty;
         public string Brand { get; set; } = string.Empty;
-        public DateTime ArrivalTime { get; set; } = DateTime.Now;
+        public DateTime ArrivalTime { get; set; } = DateTime.Parse(DateTime.Now.ToString("g"));
 
 
     }
