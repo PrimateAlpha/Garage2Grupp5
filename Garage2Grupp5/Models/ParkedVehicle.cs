@@ -9,12 +9,12 @@ namespace Garage2Grupp5.Models
         [Required]
         [Display(Name = "LicensePlate")]
         [StringLength(20)]
-        [Key] public string LicensePlate { get; set; }
+        /*[Key] */public string LicensePlate { get; set; }
 
         public string Type { get; set; }
         [Display(Name = "Type")]
         [Range(5, 100)]
-        public int Type { get; set; }
+        //public int Type { get; set; }
         public string Department { get; set; }
     }
 }
