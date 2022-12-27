@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Garage2Grupp5.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace Garage2Grupp5.Models
+namespace Garage2Grupp5.Data
 {
     public class AppDbContext : DbContext
     {
@@ -14,6 +14,6 @@ namespace Garage2Grupp5.Models
         {
 
         }
-        public DbSet<ParkedVehicle> ParkedVehicles { get; set; }
+        public DbSet<ParkedVehicle> ParkedVehicle => Set<ParkedVehicle>();
     }
 }

@@ -12,20 +12,20 @@ namespace Garage2Grupp5.Controllers
 {
     public class ParkedVehiclesController : Controller
     {
-        private readonly Garage2Grupp5Context _context;
+        private readonly AppDbContext _context;
 
-        public ParkedVehiclesController(Garage2Grupp5Context context)
+        public ParkedVehiclesController(AppDbContext context)
         {
             _context = context;
         }
 
-        // GET: ParkedVehicles
+        // GET: ParkedVehicles1
         public async Task<IActionResult> Index()
         {
               return View(await _context.ParkedVehicle.ToListAsync());
         }
 
-        // GET: ParkedVehicles/Details/5
+        // GET: ParkedVehicles1/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.ParkedVehicle == null)
@@ -43,18 +43,18 @@ namespace Garage2Grupp5.Controllers
             return View(parkedVehicle);
         }
 
-        // GET: ParkedVehicles/Create
+        // GET: ParkedVehicles1/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ParkedVehicles/Create
+        // POST: ParkedVehicles1/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LicensePlate,Type,Department")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Create([Bind("Id,LicensePlate,Type,NrOfWheels,Color,Brand,ArrivalTime")] ParkedVehicle parkedVehicle)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace Garage2Grupp5.Controllers
             return View(parkedVehicle);
         }
 
-        // GET: ParkedVehicles/Edit/5
+        // GET: ParkedVehicles1/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.ParkedVehicle == null)
@@ -81,12 +81,12 @@ namespace Garage2Grupp5.Controllers
             return View(parkedVehicle);
         }
 
-        // POST: ParkedVehicles/Edit/5
+        // POST: ParkedVehicles1/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LicensePlate,Type,Department")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,LicensePlate,Type,NrOfWheels,Color,Brand,ArrivalTime")] ParkedVehicle parkedVehicle)
         {
             if (id != parkedVehicle.Id)
             {
@@ -116,7 +116,7 @@ namespace Garage2Grupp5.Controllers
             return View(parkedVehicle);
         }
 
-        // GET: ParkedVehicles/Delete/5
+        // GET: ParkedVehicles1/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.ParkedVehicle == null)
@@ -134,14 +134,14 @@ namespace Garage2Grupp5.Controllers
             return View(parkedVehicle);
         }
 
-        // POST: ParkedVehicles/Delete/5
+        // POST: ParkedVehicles1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.ParkedVehicle == null)
             {
-                return Problem("Entity set 'Garage2Grupp5Context.ParkedVehicle'  is null.");
+                return Problem("Entity set 'AppDbContext.ParkedVehicle'  is null.");
             }
             var parkedVehicle = await _context.ParkedVehicle.FindAsync(id);
             if (parkedVehicle != null)
