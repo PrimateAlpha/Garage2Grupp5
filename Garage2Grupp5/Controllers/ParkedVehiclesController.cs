@@ -19,22 +19,51 @@ namespace Garage2Grupp5.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Unpark(int? id)
+        public IActionResult Unpark(string LicensePlate, int? Id)
         {
-            if (id == null || _context.ParkedVehicle == null)
+            if (Id == null || _context.ParkedVehicle == null)
             {
                 return NotFound();
             }
 
-            var parkedVehicle = await _context.ParkedVehicle
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var parkedVehicle = _context.ParkedVehicle
+                .FirstOrDefault(m => m.Id == Id);
             if (parkedVehicle == null)
             {
                 return NotFound();
             }
 
             return View(parkedVehicle);
+
+            //var validateName = _context.ParkedVehicle.FirstOrDefault
+            //                    (x => x.LicensePlate == LicensePlate && x.Id != Id);
+            //if (validateName != null)
+            //{
+            //    return Json(false/*, JsonRequestBehavior.AllowGet*/);
+            //}
+            //else
+            //{
+            //    return Json(true/*, JsonRequestBehavior.AllowGet*/);
+            //}
+            //return View();
         }
+
+        //public async Task<IActionResult> Unpark(int? id)
+        //{
+        //    if (id == null || _context.ParkedVehicle == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var parkedVehicle = await _context.ParkedVehicle
+        //        .FirstOrDefaultAsync(m => m.Id == id);
+        //    if (parkedVehicle == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(parkedVehicle);
+        //}
 
         // GET: ParkedVehicles1
         public async Task<IActionResult> Index()
