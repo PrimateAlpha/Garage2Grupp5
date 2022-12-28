@@ -44,10 +44,22 @@ namespace Garage2Grupp5.Controllers
         }
 
         // GET: ParkedVehicles1/Create
-        public IActionResult Create()
+        public IActionResult Create(string LicensePlate, int? Id)
         {
+            var validateName = _context.ParkedVehicle.FirstOrDefault
+                                (x => x.LicensePlate == LicensePlate && x.Id != Id);
+            if (validateName != null)
+            {
+                return Json(false/*, JsonRequestBehavior.AllowGet*/);
+            }
+            else
+            {
+                return Json(true/*, JsonRequestBehavior.AllowGet*/);
+            }
             return View();
         }
+
+
 
         // POST: ParkedVehicles1/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
