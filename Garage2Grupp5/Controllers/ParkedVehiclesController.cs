@@ -32,8 +32,31 @@ namespace Garage2Grupp5.Controllers
             {
                 return NotFound();
             }
+            if (_context.ParkedVehicle == null)
+            {
+                return Problem("Entity set 'AppDbContext.ParkedVehicle'  is null.");
+            }
+            var parkedVehicle1 = _context.ParkedVehicle.Find(Id);
+            if (parkedVehicle1 != null)
+            {
+                _context.ParkedVehicle.Remove(parkedVehicle1);
+            }
 
-            return View(parkedVehicle);
+            _context.SaveChanges();
+            return RedirectToAction(nameof(Index));
+            //if (Id == null || _context.ParkedVehicle == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //var parkedVehicle = _context.ParkedVehicle
+            //    .FirstOrDefault(m => m.Id == Id);
+            //if (parkedVehicle == null)
+            //{
+            //    return NotFound();
+            //}
+
+            //return View(parkedVehicle);
 
             //var validateName = _context.ParkedVehicle.FirstOrDefault
             //                    (x => x.LicensePlate == LicensePlate && x.Id != Id);

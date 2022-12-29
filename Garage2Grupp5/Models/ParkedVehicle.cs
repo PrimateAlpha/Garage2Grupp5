@@ -10,6 +10,9 @@ namespace Garage2Grupp5.Models
         [Required]
         [Display(Name = "LicensePlate")]
         [StringLength(20)]
+        //Try disable javascript in microsoft edge while debugging this Remote:
+        //like this in microsoft edge:
+        //Settings -> Preferences ->
         [Remote("IsLicensePlateExist", "ParkedVehicle", AdditionalFields = "Id",
                 ErrorMessage = "LicensePlate already exists")]
         public string LicensePlate { get; set; } = string.Empty;
