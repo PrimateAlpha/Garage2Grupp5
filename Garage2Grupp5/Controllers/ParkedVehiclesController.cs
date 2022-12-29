@@ -19,6 +19,11 @@ namespace Garage2Grupp5.Controllers
             _context = context;
         }
 
+        public IActionResult ParkingReceipt()
+        {
+            return View();
+        }
+
         public IActionResult Unpark(string LicensePlate, int? Id)
         {
             if (Id == null || _context.ParkedVehicle == null)
@@ -43,7 +48,7 @@ namespace Garage2Grupp5.Controllers
             }
 
             _context.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(ParkingReceipt/*Index*/));
             //if (Id == null || _context.ParkedVehicle == null)
             //{
             //    return NotFound();
@@ -113,30 +118,77 @@ namespace Garage2Grupp5.Controllers
         }
 
         // GET: ParkedVehicles1/Create
-        public IActionResult Create(string LicensePlate, int? Id)
-        {
-            var validateName = _context.ParkedVehicle.FirstOrDefault
-                                (x => x.LicensePlate == LicensePlate && x.Id != Id);
-            if (validateName != null)
-            {
-                return Json(false/*, JsonRequestBehavior.AllowGet*/);
-            }
-            else
-            {
-                return Json(true/*, JsonRequestBehavior.AllowGet*/);
-            }
-            return View();
-        }
+
+        // GET: ParkedVehicles/Create
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
+        //public IActionResult Create(int Id)
+        //{
+        //var validateName = _context.ParkedVehicle.FirstOrDefault
+        //                    (x => x.LicensePlate == LicensePlate && x.Id != Id);
+        //if (validateName != null)
+        //{
+        //    return Json(false/*, JsonRequestBehavior.AllowGet*/);
+        //}
+        //else
+        //{
+        //    return Json(true/*, JsonRequestBehavior.AllowGet*/);
+        //}
+        //if (ModelState.IsValid)
+        //{
+        //    _context.Add(parkedVehicle);
+        //    _context.SaveChanges();
+        //    return RedirectToAction(nameof(Index));
+        //}
+        //return View(parkedVehicle);
+        //return View();
+        //}
 
 
 
         // POST: ParkedVehicles1/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<IActionResult> Create([Bind("Id,LicensePlate,Type,NrOfWheels,Color,Brand,ArrivalTime")] ParkedVehicle parkedVehicle)
+        //{
+        //    //var parkedVehicle1 = _context.ParkedVehicle.Find(parkedVehicle.LicensePlate);
+        //    //if (parkedVehicle1 != null)
+        //    //{
+        //    //    return View("LicensePlateAlreadyExistError.cshtml");
+        //    //}
+        //    if (ModelState.IsValid)
+        //    {
+        //        _context.Add(parkedVehicle);
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(parkedVehicle);
+        //}
+
+        // GET: ParkedVehicles/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        // POST: ParkedVehicles/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LicensePlate,Type,NrOfWheels,Color,Brand,ArrivalTime")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Create([Bind("Id,LicensePlate,Type,Department")] ParkedVehicle parkedVehicle)
         {
+            //var parkedVehicle1 = _context.ParkedVehicle.Find(parkedVehicle.LicensePlate);
+            var parkedVehicle1 = _context.ParkedVehicle.FirstOrDefault(acc => acc.LicensePlate == parkedVehicle.LicensePlate);
+
+            if (parkedVehicle1 != null)
+            {
+                return View("~/Views/ParkedVehicles/LicensePlateAlreadyExistError.cshtml");
+            }
             if (ModelState.IsValid)
             {
                 _context.Add(parkedVehicle);
@@ -145,6 +197,11 @@ namespace Garage2Grupp5.Controllers
             }
             return View(parkedVehicle);
         }
+
+
+
+
+
 
         // GET: ParkedVehicles1/Edit/5
         public async Task<IActionResult> Edit(int? id)
