@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Garage2Grupp5.Models;
 using Microsoft.EntityFrameworkCore;
+using Garage2Grupp5.ViewModels;
 
 namespace Garage2Grupp5.Data
 {
@@ -15,5 +16,6 @@ namespace Garage2Grupp5.Data
 
         }
         public DbSet<ParkedVehicle> ParkedVehicle => Set<ParkedVehicle>();
+        public DbSet<Garage2Grupp5.ViewModels.UnparkedVehicleViewModel> UnparkedVehicleViewModel { get; set; }
     }
 }

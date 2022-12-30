@@ -1,11 +1,14 @@
 ﻿using Garage2Grupp5.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Garage2Grupp5.ViewModels
 {
     public class UnparkedVehicleViewModel
     {
-        [Key] public int Id { get; set; }
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public int Id { get; set; }
 
         public TimeSpan parkingTime { get; set; }
         public double parkingPrice { get; set; }
