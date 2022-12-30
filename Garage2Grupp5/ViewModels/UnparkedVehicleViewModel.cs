@@ -7,6 +7,9 @@ namespace Garage2Grupp5.ViewModels
     {
         [Key] public int Id { get; set; }
 
+        public TimeSpan parkingTime { get; set; }
+        public double parkingPrice { get; set; }
+
         [Required]
         [Display(Name = "LicensePlate")]
         [StringLength(20)]

@@ -47,6 +47,10 @@ namespace Garage2Grupp5.Controllers
             UnparkedVehicleViewModel unparkedVehicleViewModel = new UnparkedVehicleViewModel();
             unparkedVehicleViewModel.ArrivalTime = parkedVehicle1.ArrivalTime;
             unparkedVehicleViewModel.Brand = parkedVehicle1.Brand;
+            /*parkedVehicle1.Price = */
+            unparkedVehicleViewModel.parkingTime = parkedVehicle1.DepartureTime - parkedVehicle1.ArrivalTime;
+            unparkedVehicleViewModel.parkingPrice = unparkedVehicleViewModel.parkingTime.TotalHours * 90;
+
             unparkedVehicleViewModel.Price = parkedVehicle1.Price;
             unparkedVehicleViewModel.Id = parkedVehicle1.Id;
             unparkedVehicleViewModel.DepartureTime = parkedVehicle1.DepartureTime;
@@ -197,7 +201,7 @@ namespace Garage2Grupp5.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LicensePlate,Type,Department")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Create([Bind("Id,LicensePlate,Type,NrOfWheels,Color,Brand,ArrivalTime,DepartureTime,Price")] ParkedVehicle parkedVehicle)
         {
             //var parkedVehicle1 = _context.ParkedVehicle.Find(parkedVehicle.LicensePlate);
             var parkedVehicle1 = _context.ParkedVehicle.FirstOrDefault(acc => acc.LicensePlate == parkedVehicle.LicensePlate);
