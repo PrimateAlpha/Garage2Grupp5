@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Garage2Grupp5.Data;
 using Garage2Grupp5.Models;
+using Garage2Grupp5.ViewModels;
 
 namespace Garage2Grupp5.Controllers
 {
@@ -42,13 +43,29 @@ namespace Garage2Grupp5.Controllers
                 return Problem("Entity set 'AppDbContext.ParkedVehicle'  is null.");
             }
             var parkedVehicle1 = _context.ParkedVehicle.Find(Id);
+
+            UnparkedVehicleViewModel unparkedVehicleViewModel = new UnparkedVehicleViewModel();
+            unparkedVehicleViewModel.ArrivalTime = parkedVehicle1.ArrivalTime;
+            unparkedVehicleViewModel.Brand = parkedVehicle1.Brand;
+            unparkedVehicleViewModel.Price = parkedVehicle1.Price;
+            unparkedVehicleViewModel.Id = parkedVehicle1.Id;
+            unparkedVehicleViewModel.DepartureTime = parkedVehicle1.DepartureTime;
+            unparkedVehicleViewModel.LicensePlate = parkedVehicle1.LicensePlate;
+            unparkedVehicleViewModel.NrOfWheels = parkedVehicle1.NrOfWheels;
+            unparkedVehicleViewModel.Color = parkedVehicle1.Color;
+            unparkedVehicleViewModel.Type = parkedVehicle1.Type;
+
             if (parkedVehicle1 != null)
             {
+                
+                
                 _context.ParkedVehicle.Remove(parkedVehicle1);
             }
 
             _context.SaveChanges();
-            return RedirectToAction(nameof(ParkingReceipt/*Index*/));
+            //return RedirectToAction(nameof(ParkingReceipt/*Index*/));
+            return View(unparkedVehicleViewModel);
+
             //if (Id == null || _context.ParkedVehicle == null)
             //{
             //    return NotFound();
