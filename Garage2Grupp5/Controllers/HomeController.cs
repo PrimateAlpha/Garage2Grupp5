@@ -12,7 +12,7 @@ namespace Garage2Grupp5.Controllers
         {
             _logger = logger;
         }
-
+        //2.1.2022. got help from David Nokto
         public IActionResult Index()
         {
             return View();
