@@ -1,10 +1,10 @@
-﻿@model Garage2Grupp5.ViewModels.UnparkedVehicleViewModel
+﻿@*@model Garage2Grupp5.ViewModels.UnparkedVehicleViewModel*@
 
 @{
     ViewData["Title"] = "Receipt or not?";
 }
 
 <h1>Do you want a receipt on your parking?</h1>
-<a asp-action="Unpark">Receipt</a>
-    <a asp-action="NoReceipt">No receipt</a>
+<a asp-action="UnPark" asp-route-receipt="true" asp-route-id="@ViewData["vehicleId"]">Receipt</a>
+<a asp-action="UnPark" asp-route-receipt="false" asp-route-id="@ViewData["vehicleId"]">No receipt</a>
 
