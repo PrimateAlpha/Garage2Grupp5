@@ -27,31 +27,25 @@ namespace Garage2Grupp5.Controllers
             return View();
         }
 
-        //public IActionResult Unpark(/*string LicensePlate, int? Id*/)
-        //{
-        //    //UnparkedVehicleViewModel theUnparkedVehicleViewModel = new UnparkedVehicleViewModel();
-        //    var theUnParkedVehicle = _context.UnparkedVehicleViewModel
-        //                   .First(m => m.LicensePlate == unParkedVehicleLicensePlate/*m => m.Id == theUnparkedVehicleViewModel.Id*/);
-        //    //theUnparkedVehicleViewModel.ArrivalTime = theParkedVehicle.ArrivalTime;
-        //    //theUnparkedVehicleViewModel.Brand = theParkedVehicle.Brand;
-        //    ///*parkedVehicle1.Price = */
-        //    //theUnparkedVehicleViewModel.parkingTime = theParkedVehicle.parkingTime;
-        //    //theUnparkedVehicleViewModel.parkingPrice = theParkedVehicle.parkingPrice;
-
-        //    //theUnparkedVehicleViewModel.Price = theParkedVehicle.Price;
-        //    ////theUnparkedVehicleViewModel.Id = theParkedVehicle.Id;
-        //    //theUnparkedVehicleViewModel.DepartureTime = theParkedVehicle.DepartureTime;
-        //    //theUnparkedVehicleViewModel.LicensePlate = theParkedVehicle.LicensePlate;
-        //    //theUnparkedVehicleViewModel.NrOfWheels = theParkedVehicle.NrOfWheels;
-        //    //theUnparkedVehicleViewModel.Color = theParkedVehicle.Color;
-        //    //theUnparkedVehicleViewModel.Type = theParkedVehicle.Type;
-        //    return View(theUnParkedVehicle);
-        //}
-
-        public IActionResult ReceiptOrNot(int? id)
+        public IActionResult Unpark(/*string LicensePlate, int? Id*/)
         {
-            ViewData["vehicleId"] = id;
-            return View();
+            //UnparkedVehicleViewModel theUnparkedVehicleViewModel = new UnparkedVehicleViewModel();
+            var theUnParkedVehicle = _context.UnparkedVehicleViewModel
+                           .First(m => m.LicensePlate == unParkedVehicleLicensePlate/*m => m.Id == theUnparkedVehicleViewModel.Id*/);
+            //theUnparkedVehicleViewModel.ArrivalTime = theParkedVehicle.ArrivalTime;
+            //theUnparkedVehicleViewModel.Brand = theParkedVehicle.Brand;
+            ///*parkedVehicle1.Price = */
+            //theUnparkedVehicleViewModel.parkingTime = theParkedVehicle.parkingTime;
+            //theUnparkedVehicleViewModel.parkingPrice = theParkedVehicle.parkingPrice;
+
+            //theUnparkedVehicleViewModel.Price = theParkedVehicle.Price;
+            ////theUnparkedVehicleViewModel.Id = theParkedVehicle.Id;
+            //theUnparkedVehicleViewModel.DepartureTime = theParkedVehicle.DepartureTime;
+            //theUnparkedVehicleViewModel.LicensePlate = theParkedVehicle.LicensePlate;
+            //theUnparkedVehicleViewModel.NrOfWheels = theParkedVehicle.NrOfWheels;
+            //theUnparkedVehicleViewModel.Color = theParkedVehicle.Color;
+            //theUnparkedVehicleViewModel.Type = theParkedVehicle.Type;
+            return View(theUnParkedVehicle);
         }
 
         public IActionResult UnPark(/*string LicensePlate, */int? Id, bool receipt)

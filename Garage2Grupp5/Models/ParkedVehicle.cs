@@ -7,6 +7,8 @@ namespace Garage2Grupp5.Models
     {
         [Key] public int Id { get; set; }
 
+        public int MemberId { get; set; }
+
         [Required]
         [Display(Name = "LicensePlate")]
         [StringLength(20)]
@@ -17,7 +19,7 @@ namespace Garage2Grupp5.Models
         //        ErrorMessage = "LicensePlate already exists")]
         public string LicensePlate { get; set; } = string.Empty;
 
-        public VehicleType Type { get; set; }
+        public VehicleType? Type { get; set; }
 
         [Display(Name = "Nr of wheels")]
         [Range(0, 20)]
