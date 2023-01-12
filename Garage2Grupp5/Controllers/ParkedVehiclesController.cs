@@ -26,26 +26,26 @@ namespace Garage2Grupp5.Controllers
             return View();
         }
 
-        public IActionResult Unpark(/*string LicensePlate, int? Id*/)
-        {
-            //UnparkedVehicleViewModel theUnparkedVehicleViewModel = new UnparkedVehicleViewModel();
-            var theUnParkedVehicle = _context.UnparkedVehicleViewModel
-                           .First(m => m.LicensePlate == unParkedVehicleLicensePlate/*m => m.Id == theUnparkedVehicleViewModel.Id*/);
-            //theUnparkedVehicleViewModel.ArrivalTime = theParkedVehicle.ArrivalTime;
-            //theUnparkedVehicleViewModel.Brand = theParkedVehicle.Brand;
-            ///*parkedVehicle1.Price = */
-            //theUnparkedVehicleViewModel.parkingTime = theParkedVehicle.parkingTime;
-            //theUnparkedVehicleViewModel.parkingPrice = theParkedVehicle.parkingPrice;
+        //public IActionResult Unpark(/*string LicensePlate, int? Id*/)
+        //{
+        //    //UnparkedVehicleViewModel theUnparkedVehicleViewModel = new UnparkedVehicleViewModel();
+        //    //var theUnParkedVehicle = _context.UnparkedVehicleViewModel
+        //    //               .First(m => m.LicensePlate == unParkedVehicleLicensePlate/*m => m.Id == theUnparkedVehicleViewModel.Id*/);
+        //    //theUnparkedVehicleViewModel.ArrivalTime = theParkedVehicle.ArrivalTime;
+        //    //theUnparkedVehicleViewModel.Brand = theParkedVehicle.Brand;
+        //    ///*parkedVehicle1.Price = */
+        //    //theUnparkedVehicleViewModel.parkingTime = theParkedVehicle.parkingTime;
+        //    //theUnparkedVehicleViewModel.parkingPrice = theParkedVehicle.parkingPrice;
 
-            //theUnparkedVehicleViewModel.Price = theParkedVehicle.Price;
-            ////theUnparkedVehicleViewModel.Id = theParkedVehicle.Id;
-            //theUnparkedVehicleViewModel.DepartureTime = theParkedVehicle.DepartureTime;
-            //theUnparkedVehicleViewModel.LicensePlate = theParkedVehicle.LicensePlate;
-            //theUnparkedVehicleViewModel.NrOfWheels = theParkedVehicle.NrOfWheels;
-            //theUnparkedVehicleViewModel.Color = theParkedVehicle.Color;
-            //theUnparkedVehicleViewModel.Type = theParkedVehicle.Type;
-            return View(theUnParkedVehicle);
-        }
+        //    //theUnparkedVehicleViewModel.Price = theParkedVehicle.Price;
+        //    ////theUnparkedVehicleViewModel.Id = theParkedVehicle.Id;
+        //    //theUnparkedVehicleViewModel.DepartureTime = theParkedVehicle.DepartureTime;
+        //    //theUnparkedVehicleViewModel.LicensePlate = theParkedVehicle.LicensePlate;
+        //    //theUnparkedVehicleViewModel.NrOfWheels = theParkedVehicle.NrOfWheels;
+        //    //theUnparkedVehicleViewModel.Color = theParkedVehicle.Color;
+        //    //theUnparkedVehicleViewModel.Type = theParkedVehicle.Type;
+        //    //return View(theUnParkedVehicle);
+        //}
 
         public IActionResult ReceiptOrNot(string LicensePlate, int? Id)
         {
@@ -88,7 +88,7 @@ namespace Garage2Grupp5.Controllers
 
                 _context.ParkedVehicle.Remove(parkedVehicle1);
             }
-            _context.UnparkedVehicleViewModel.Add(unparkedVehicleViewModel);
+            //_context.UnparkedVehicleViewModel.Add(unparkedVehicleViewModel);
 
             _context.SaveChanges();
             //return RedirectToAction(nameof(ParkingReceipt/*Index*/));

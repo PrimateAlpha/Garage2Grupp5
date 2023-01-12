@@ -16,6 +16,5 @@ namespace Garage2Grupp5.Data
 
         }
         public DbSet<ParkedVehicle> ParkedVehicle => Set<ParkedVehicle>();
-        public DbSet<Garage2Grupp5.ViewModels.UnparkedVehicleViewModel> UnparkedVehicleViewModel { get; set; }
     }
 }
