@@ -1,9 +1,11 @@
 ﻿namespace Garage2Grupp5.Models
 {
-    public enum VehicleType
+    public class VehicleType
     {
-        Car,
-        Buss,
-        Boat
+        public int Id { get; set; }
+        public string Name { get; set; }
+        //Car,
+        //Buss,
+        //Boat
     }
 }
