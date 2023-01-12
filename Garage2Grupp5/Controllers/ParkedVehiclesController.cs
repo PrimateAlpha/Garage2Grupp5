@@ -80,7 +80,11 @@ namespace Garage2Grupp5.Controllers
             unparkedVehicleViewModel.LicensePlate = parkedVehicle1.LicensePlate;
             unparkedVehicleViewModel.NrOfWheels = parkedVehicle1.NrOfWheels;
             unparkedVehicleViewModel.Color = parkedVehicle1.Color;
+            //unparkedVehicleViewModel.Type = parkedVehicle1.Type;
+            //unparkedVehicleViewModel.Type.Name = parkedVehicle1.Type;
             unparkedVehicleViewModel.Type = parkedVehicle1.Type;
+
+
             unParkedVehicleLicensePlate = unparkedVehicleViewModel.LicensePlate;
 
             if (parkedVehicle1 != null)
@@ -265,10 +269,19 @@ namespace Garage2Grupp5.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,LicensePlate,Type,NrOfWheels,Color,Brand,ArrivalTime,DepartureTime,Price")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Create([Bind("Id,LicensePlate,Type,VehicleType,NrOfWheels,Color,Brand,ArrivalTime,DepartureTime,Price")] ParkedVehicle parkedVehicle)
         {
             //var parkedVehicle1 = _context.ParkedVehicle.Find(parkedVehicle.LicensePlate);
             var parkedVehicle1 = _context.ParkedVehicle.FirstOrDefault(acc => acc.LicensePlate == parkedVehicle.LicensePlate);
+
+            VehicleType vehicleType = new VehicleType();
+            //vehicleType.Name = parkedVehicle.Type.Name;
+            //vehicleType.Name = parkedVehicle.Type;
+            vehicleType.Name = parkedVehicle.VehicleType;
+
+
+            //vehicleType.Name = parkedVehicle.Type.ToString();
+            _context.Add(vehicleType);
 
             if (parkedVehicle1 != null)
             {
@@ -276,7 +289,10 @@ namespace Garage2Grupp5.Controllers
             }
             if (ModelState.IsValid)
             {
-                _context.Add(parkedVehicle);
+                //VehicleType vehicleType = new VehicleType();
+                //vehicleType.Name = parkedVehicle.Type.ToString();
+                //_context.Add(vehicleType);
+                _context.Add(parkedVehicle);                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
