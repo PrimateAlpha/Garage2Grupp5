@@ -20,6 +20,10 @@ namespace Garage2Grupp5.Models
         public string LicensePlate { get; set; } = string.Empty;
 
         public VehicleType? Type { get; set; }
+        //public VehicleType Type { get; set; }/* = VehicleType.;*/
+        public string VehicleType { get; set; } /*= string.Empty;*/
+
+
 
         [Display(Name = "Nr of wheels")]
         [Range(0, 20)]
