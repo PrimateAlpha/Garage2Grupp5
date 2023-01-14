@@ -7,7 +7,17 @@ namespace Garage2Grupp5.Models
     {
         [Key] public int Id { get; set; }
 
-        public int MemberId { get; set; }
+        // Nav props
+
+        public Membership Membership { get; set; }
+        public VehicleType? Type { get; set; }
+        //public VehicleType Type { get; set; }/* = VehicleType.;*/
+
+        // Foreign Keys
+
+        public int MembershipId { get; set; }
+        public int VehicleTypeId { get; set; }
+
 
         [Required]
         [Display(Name = "LicensePlate")]
@@ -19,8 +29,7 @@ namespace Garage2Grupp5.Models
         //        ErrorMessage = "LicensePlate already exists")]
         public string LicensePlate { get; set; } = string.Empty;
 
-        public VehicleType? Type { get; set; }
-        //public VehicleType Type { get; set; }/* = VehicleType.;*/
+        
         public string VehicleType { get; set; } /*= string.Empty;*/
 
 
