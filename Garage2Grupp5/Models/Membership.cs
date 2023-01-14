@@ -7,7 +7,7 @@ namespace Garage2Grupp5.Models
         [Key] public int Id { get; set; }
 
         //Navigation properties        
-        public ICollection<ParkedVehicle> ParkedVehicles { get; set; }
+        //public ICollection<ParkedVehicle> ParkedVehicles { get; set; }
         //public ICollection<Enrollment> Enrollments { get; set; }
     
     public string SocialSecurityNumber { get; set; }

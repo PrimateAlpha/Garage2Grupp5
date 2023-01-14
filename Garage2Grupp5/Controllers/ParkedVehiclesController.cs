@@ -16,10 +16,13 @@ namespace Garage2Grupp5.Controllers
     {
         string unParkedVehicleLicensePlate;
         private readonly AppDbContext _context;
+        private readonly IVehicleTypeSelectListService vehicleTypeSelectListService;
 
-        public ParkedVehiclesController(AppDbContext context)
+
+        public ParkedVehiclesController(AppDbContext context, IVehicleTypeSelectListService vehicleTypeSelectListService)
         {
             _context = context;
+            this.vehicleTypeSelectListService = vehicleTypeSelectListService;
         }
 
         public IActionResult ParkingReceipt()
@@ -185,7 +188,45 @@ namespace Garage2Grupp5.Controllers
         // GET: ParkedVehicles1
         public async Task<IActionResult> Index()
         {
-              return View(await _context.ParkedVehicle.ToListAsync());
+            var model = new ParkedVehicleViewModel/*ParkedVehicle*/
+            {
+                ParkedVehicles = await _context.ParkedVehicle.ToListAsync(),/*movies.ToListAsync()*/,
+                VehicleTypes = await vehicleTypeSelectListService.GetVehicleTypesAsync() //GetGenresAsync()
+            };
+            return View(nameof(Index2), model/*await _context.ParkedVehicle.ToListAsync()*/);
+        }
+
+        private async Task<IEnumerable<SelectListItem>> GetVehicleTypesAsync()
+        {
+            return await _context.ParkedVehicle.Select(m => m.Type)
+                                .Distinct()
+                                .Select(g => new SelectListItem
+                                {
+                                    Text = g.ToString(),
+                                    Value = g.ToString()
+                                })
+                                .ToListAsync();
+        }
+
+        public async Task<IActionResult> Index2(/*ParkedVehicleViewModel model*/)
+        {
+            var parkedVehicles = await _context.ParkedVehicle.ToListAsync();
+
+            var model = new ParkedVehicleViewModel
+            {
+                ParkedVehicles = parkedVehicles,
+                VehicleTypes = parkedVehicles.Select(m => m.Type)
+                               .Distinct()
+                               .Select(g => new SelectListItem
+                               {
+                                   Text = g.ToString(),
+                                   Value = g.ToString()
+                               })
+                               .ToList()
+            };
+
+            return View(model);
+
         }
 
         // GET: ParkedVehicles1/Details/5
@@ -276,22 +317,29 @@ namespace Garage2Grupp5.Controllers
 
             //var parkedVehicle1 = _context.ParkedVehicle.Find(parkedVehicle.LicensePlate);
             var parkedVehicle1 = _context.ParkedVehicle.FirstOrDefault(acc => acc.LicensePlate == parkedVehicle.LicensePlate);
-            var vehicleType = _context.VehicleType.FirstOrDefault(acc => acc.Name == parkedVehicle.VehicleType); //
+            //var vehicleType = _context.VehicleType.FirstOrDefault(acc => acc.Name == parkedVehicle.VehicleType); //
+            //_context.ParkedVehicle.
+            //var movies = parkedVehicle.VehicleType is null ?
+            //                    movies :
+            //                    movies.Where(m => m.VehicleType == parkedVehicle.VehicleType);
+            if (parkedVehicle1 != null)
+            {
+                return View("~/Views/ParkedVehicles/LicensePlateAlreadyExistError.cshtml");
+            }
 
-            var newVehicle = new ParkedVehicle
+            //_context.ParkedVehicle.
+
+            var newVehicle = new ParkedVehicleViewModel/*ParkedVehicle*/
             {
                 //fyll på med resten av properties
-                Type = vehicleType
+                //Type = vehicleType
                 //LicensePlate = vehicleType.
             };
 
 
             
 
-            if (parkedVehicle1 != null)
-            {
-                return View("~/Views/ParkedVehicles/LicensePlateAlreadyExistError.cshtml");
-            }
+           
             if (ModelState.IsValid)
             {
                 //VehicleType vehicleType = new VehicleType();
