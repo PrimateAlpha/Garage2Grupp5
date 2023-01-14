@@ -18,5 +18,6 @@ namespace Garage2Grupp5.Data
         public DbSet<ParkedVehicle> ParkedVehicle => Set<ParkedVehicle>();
         public DbSet<VehicleType> VehicleType => Set<VehicleType>();
         public DbSet<Garage2Grupp5.ViewModels.ParkedVehicleViewModel> ParkedVehicleViewModel { get; set; }
+        public DbSet<Garage2Grupp5.Models.Membership> Membership { get; set; }
     }
 }
