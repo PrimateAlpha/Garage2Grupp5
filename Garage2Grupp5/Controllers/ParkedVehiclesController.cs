@@ -269,19 +269,20 @@ namespace Garage2Grupp5.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Create(ParkedVehicleViewModel parkedVehicle/*ParkedVehicle parkedVehicle*/)
         {
             //BYt ut agrumentet till en Vymodell
 
 
             //var parkedVehicle1 = _context.ParkedVehicle.Find(parkedVehicle.LicensePlate);
             var parkedVehicle1 = _context.ParkedVehicle.FirstOrDefault(acc => acc.LicensePlate == parkedVehicle.LicensePlate);
-            var vehicleType = _context.VehicleType.FirstOrDefault(); //
+            var vehicleType = _context.VehicleType.FirstOrDefault(acc => acc.Name == parkedVehicle.VehicleType); //
 
             var newVehicle = new ParkedVehicle
             {
                 //fyll på med resten av properties
                 Type = vehicleType
+                //LicensePlate = vehicleType.
             };
 
 
@@ -300,7 +301,7 @@ namespace Garage2Grupp5.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(parkedVehicle);
+            return View(newVehicle/*parkedVehicle*/);
         }
 
 
