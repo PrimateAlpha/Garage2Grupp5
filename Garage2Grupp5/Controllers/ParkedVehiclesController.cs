@@ -339,7 +339,6 @@ namespace Garage2Grupp5.Controllers
                 //
             }
 
-            //_context.ParkedVehicle.
 
             var vehicleType = await _context.VehicleType.FirstOrDefaultAsync(vt => vt.Name == registeredVehicle.VehicleType);
 
@@ -374,7 +373,7 @@ namespace Garage2Grupp5.Controllers
                 //VehicleType vehicleType = new VehicleType();
                 //vehicleType.Name = parkedVehicle.Type.ToString();
                 //_context.Add(vehicleType);
-                _context.Add(registeredVehicle);                
+                _context.Add(newVehicle);                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
