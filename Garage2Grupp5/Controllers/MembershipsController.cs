@@ -56,6 +56,18 @@ namespace Garage2Grupp5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,SocialSecurityNumber,FirstName,LastName,FullName")] Membership membership)
         {
+            var vehicleType = await _context.VehicleType.FirstOrDefaultAsync(vt => vt.Name = registeredVehicle.VehicleType);
+
+            var newVehicle = new /*RegisteredVehicleViewModel*/ParkedVehicle
+            {
+                LicensePlate = registeredVehicle.LicensePlate,
+                Brand = registeredVehicle.Brand,
+                VehicleTypeId = vehicleType.Id
+                //fyll på med resten av properties
+                //Type = vehicleType
+                //LicensePlate = vehicleType.
+            };
+
             if (ModelState.IsValid)
             {
                 _context.Add(membership);
