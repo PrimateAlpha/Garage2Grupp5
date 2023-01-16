@@ -6,7 +6,7 @@ using System.Xml.Linq;
 
 namespace Garage2Grupp5.ViewModels
 {
-    public class ParkedVehicleViewModel
+    public class RegisteredVehicleViewModel
     {
         //public ParkedVehicleViewModel() { }
         //[Key] public int Id { get; set; }
@@ -31,6 +31,9 @@ namespace Garage2Grupp5.ViewModels
         //public VehicleType Type { get; set; }/* = VehicleType.;*/
         public string VehicleType { get; set; } /*= string.Empty;*/
 
+        public int MemberFullName { get; set; }
+
+
 
 
         [Display(Name = "Nr of wheels")]
@@ -40,9 +43,11 @@ namespace Garage2Grupp5.ViewModels
 
         public string Color { get; set; } = string.Empty;
         public string Brand { get; set; } = string.Empty;
-        public DateTime ArrivalTime { get; set; } = DateTime.Parse(DateTime.Now.ToString("g"));
 
-        public DateTime DepartureTime { get; set; } = DateTime.Parse(DateTime.Now.ToString("g"));
+        //No ArrivalTime - vehicle is just registered, not yet parked
+        //public DateTime ArrivalTime { get; set; } = DateTime.Parse(DateTime.Now.ToString("g"));
+
+        //public DateTime DepartureTime { get; set; } = DateTime.Parse(DateTime.Now.ToString("g"));
 
         public decimal Price { get; set; }
     }

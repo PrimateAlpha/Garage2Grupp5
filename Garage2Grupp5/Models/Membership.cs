@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ActiveLogin.Identity.Swedish.AspNetCore.Validation;
+using System.ComponentModel.DataAnnotations;
 
 namespace Garage2Grupp5.Models
 {
@@ -14,6 +15,7 @@ namespace Garage2Grupp5.Models
         //[RegularExpression(@"^\d{9}|\d{3}-\d{2}-\d{4}$", ErrorMessage = "Invalid Social Security Number")]
         //[PersonalIdentityNumber]
 
+        [PersonalIdentityNumber]
         public string SocialSecurityNumber { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

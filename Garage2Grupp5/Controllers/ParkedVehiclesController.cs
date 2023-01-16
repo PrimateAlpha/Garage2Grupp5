@@ -192,7 +192,7 @@ namespace Garage2Grupp5.Controllers
         // GET: ParkedVehicles1
         public async Task<IActionResult> Index()
         {
-            var model = new ParkedVehicleViewModel/*ParkedVehicle*/
+            var model = new RegisteredVehicleViewModel/*ParkedVehicle*/
             {
                 //ParkedVehicles = await _context.ParkedVehicle.ToListAsync(),/*movies.ToListAsync()*/
                 VehicleTypes = await vehicleTypeSelectListService.GetVehicleTypesAsync() //GetGenresAsync()
@@ -216,7 +216,7 @@ namespace Garage2Grupp5.Controllers
         {
             var parkedVehicles = await _context.ParkedVehicle.ToListAsync();
 
-            var model = new ParkedVehicleViewModel
+            var model = new RegisteredVehicleViewModel
             {
                 //ParkedVehicles = parkedVehicles,
                 VehicleTypes = parkedVehicles.Select(m => m.Type)
@@ -309,18 +309,25 @@ namespace Garage2Grupp5.Controllers
             return View();
         }
 
-        // POST: ParkedVehicles/Create
+        public async Task<IActionResult> Search(SearchViewModel search/*ParkedVehicle parkedVehicle*/)
+        {
+
+            return View(search);
+
+        }
+
+        // POST: ParkedVehicles/RegisterVehicle
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(ParkedVehicleViewModel parkedVehicle/*ParkedVehicle parkedVehicle*/)
+        public async Task<IActionResult> RegisterVehicle(RegisteredVehicleViewModel registeredVehicle/*ParkedVehicle parkedVehicle*/)
         {
             //BYt ut agrumentet till en Vymodell
 
 
             //var parkedVehicle1 = _context.ParkedVehicle.Find(parkedVehicle.LicensePlate);
-            var parkedVehicle1 = _context.ParkedVehicle.FirstOrDefault(acc => acc.LicensePlate == parkedVehicle.LicensePlate);
+            var parkedVehicle1 = _context.ParkedVehicle.FirstOrDefault(acc => acc.LicensePlate == registeredVehicle.LicensePlate);
             //var vehicleType = _context.VehicleType.FirstOrDefault(acc => acc.Name == parkedVehicle.VehicleType); //
             //_context.ParkedVehicle.
             //var movies = parkedVehicle.VehicleType is null ?
@@ -333,7 +340,7 @@ namespace Garage2Grupp5.Controllers
 
             //_context.ParkedVehicle.
 
-            var newVehicle = new ParkedVehicleViewModel/*ParkedVehicle*/
+            var newVehicle = new RegisteredVehicleViewModel/*ParkedVehicle*/
             {
                 //fyll på med resten av properties
                 //Type = vehicleType
@@ -349,7 +356,7 @@ namespace Garage2Grupp5.Controllers
                 //VehicleType vehicleType = new VehicleType();
                 //vehicleType.Name = parkedVehicle.Type.ToString();
                 //_context.Add(vehicleType);
-                _context.Add(parkedVehicle);                
+                _context.Add(registeredVehicle);                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

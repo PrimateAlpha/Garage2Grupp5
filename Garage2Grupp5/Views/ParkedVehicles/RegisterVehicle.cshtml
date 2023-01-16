@@ -1,16 +1,18 @@
-﻿@model Garage2Grupp5.ViewModels.ParkedVehicleViewModel
+﻿@model Garage2Grupp5.ViewModels.RegisteredVehicleViewModel
 @*@model Garage2Grupp5.Models.ParkedVehicle
 *@@*@model Garage2Grupp5.Models.VehicleType
 *@
-@inject IVehicleTypeSelectListService Service
+@inject IVehicleTypeSelectListService VehicleTypeSelectListService
+@inject IMemberFullNameService MemberFullNameService
+
 
 @{
-    ViewData["Title"] = "Park a vehicle";
+    ViewData["Title"] = "Register a vehicle";
 }
 
-<h1>Park a vehicle</h1>
+<h1>Register a vehicle</h1>
 
-<h4>ParkedVehicle</h4>
+<h4>Vehicle you want to register</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -23,15 +25,15 @@
             </div>
 
             <div class="input-group-append">
-                <label asp-for="MemberId" class="control-label"></label>
-                <select class="form-control" asp-for="MemberId" asp-items="@await Service.GetVehicleTypesAsync()">
-                    <option selected="selected" value="">Please select member Id</option>
+                <label asp-for="MemberFullName" class="control-label"></label>
+                <select class="form-control" asp-for="MemberFullName" asp-items="@await MemberFullNameService.GetMemberFullNamesAsync()">
+                    <option selected="selected" value="">Please select your full name</option>
                 </select>
             </div>
 
             <div class="input-group-append">
                 <label asp-for="VehicleType" class="control-label"></label>
-                <select class="form-control" asp-for="VehicleType" asp-items="@await Service.GetVehicleTypesAsync()">
+                <select class="form-control" asp-for="VehicleType" asp-items="@await VehicleTypeSelectListService.GetVehicleTypesAsync()">
                     <option selected="selected" value="">Please select vehicle type</option>
                 </select>
             </div>

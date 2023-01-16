@@ -16,7 +16,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<IMemberFullNameService, MemberFullNameService>();
+
 builder.Services.AddScoped<IVehicleTypeSelectListService, VehicleTypeSelectListService>();
+
 
 //builder.Services.AddScoped<IParkedVehicleRepository, ParkedVehicleRepository>();
 
