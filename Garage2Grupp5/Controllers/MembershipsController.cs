@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Garage2Grupp5.Data;
 using Garage2Grupp5.Models;
+using Garage2Grupp5.ViewModels;
 
 namespace Garage2Grupp5.Controllers
 {
@@ -54,19 +55,21 @@ namespace Garage2Grupp5.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SocialSecurityNumber,FirstName,LastName,FullName")] Membership membership)
+        public async Task<IActionResult> Create(MembershipViewModel membershipViewModel/*[Bind("Id,SocialSecurityNumber,FirstName,LastName,FullName")] Membership membership*/)
         {
-            //var vehicleType = await _context.VehicleType.FirstOrDefaultAsync(vt => vt.Name = registeredVehicle.VehicleType);
+            var memberFullName = await _context.Membership.FirstOrDefaultAsync(vt => vt.FullName == membershipViewModel.FullName);
 
-            //var newVehicle = new /*RegisteredVehicleViewModel*/ParkedVehicle
-            //{
-            //    LicensePlate = registeredVehicle.LicensePlate,
-            //    Brand = registeredVehicle.Brand,
-            //    VehicleTypeId = vehicleType.Id
-            //    //fyll på med resten av properties
-            //    //Type = vehicleType
-            //    //LicensePlate = vehicleType.
-            //};
+            var newMemberFullName = new /*RegisteredVehicleViewModel*/Membership
+            {
+                SocialSecurityNumber = membershipViewModel.SocialSecurityNumber,
+                FirstName = membershipViewModel.FirstName,
+                LastName = membershipViewModel.LastName,
+                Id = memberFullName.Id
+                //FullName = newMemberFullName.FirstName + " " + newMemberFullName
+                //fyll på med resten av properties
+                //Type = vehicleType
+                //LicensePlate = vehicleType.
+            };
 
             if (ModelState.IsValid)
             {
