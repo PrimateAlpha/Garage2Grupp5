@@ -336,12 +336,17 @@ namespace Garage2Grupp5.Controllers
             if (parkedVehicle1 != null)
             {
                 return View("~/Views/ParkedVehicles/LicensePlateAlreadyExistError.cshtml");
+                //
             }
 
             //_context.ParkedVehicle.
+            var vehicleType = await _context.VehicleType.FirstOrDefaultAsync(vt => vt.Name == registeredVehicle.VehicleType);
 
-            var newVehicle = new RegisteredVehicleViewModel/*ParkedVehicle*/
+            var newVehicle = new /*RegisteredVehicleViewModel*/ParkedVehicle
             {
+                LicensePlate = registeredVehicle.LicensePlate,
+                Brand = registeredVehicle.Brand,
+                VehicleTypeId = vehicleType.Id
                 //fyll på med resten av properties
                 //Type = vehicleType
                 //LicensePlate = vehicleType.
