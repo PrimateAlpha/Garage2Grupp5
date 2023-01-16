@@ -3,6 +3,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Garage2Grupp5.Data;
 using System;
 using Garage2Grupp5.Services;
+using System.Web.Http.Cors;
+using System.Web.Http;
 //var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddDbContext<Garage2Grupp5Context>(options =>
 //    options.UseSqlServer(builder.Configuration.GetConnectionString("Garage2Grupp5Context") ?? throw new InvalidOperationException("Connection string 'Garage2Grupp5Context' not found.")));
@@ -40,6 +42,15 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+// Web API configuration and services
+//var cors = new EnableCorsAttribute("*", "*", "*");
+//HttpConfiguration config = new HttpConfiguration();
+//config.EnableCors(cors);
+
+//// Web API routes
+//config.MapHttpAttributeRoutes();
+
 
 app.MapControllerRoute(
     name: "default",
