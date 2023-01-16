@@ -304,9 +304,9 @@ namespace Garage2Grupp5.Controllers
         //}
 
         // GET: ParkedVehicles/Create
-        public IActionResult Register()
+        public IActionResult RegisterVehicle()
         {
-            return View("RegisterVehicle.cshtml");
+            return View();
         }
 
         public async Task<IActionResult> Search(SearchViewModel search/*ParkedVehicle parkedVehicle*/)
