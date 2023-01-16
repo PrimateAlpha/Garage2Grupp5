@@ -5,18 +5,18 @@ using Garage2Grupp5.Data;
 
 namespace Garage2Grupp5.Services
 {
-    public class VehicleTypeSelectListService : IGenreSelectListService
+    public class VehicleTypeSelectListService : IVehicleTypeSelectListService
     {
-        private readonly MovieDemoContext _context;
+        private readonly AppDbContext _context;
 
-        public GenreSelectListService(MovieDemoContext context)
+        public VehicleTypeSelectListService(AppDbContext context)
         {
             _context = context;
         }
 
-        public async Task<IEnumerable<SelectListItem>> GetGenresAsync()
+        public async Task<IEnumerable<SelectListItem>> GetVehicleTypesAsync()
         {
-            return await _context.Movie.Select(m => m.Genre)
+            return await _context.ParkedVehicle.Select(m => m.Type)
                                 .Distinct()
                                 .Select(g => new SelectListItem
                                 {
