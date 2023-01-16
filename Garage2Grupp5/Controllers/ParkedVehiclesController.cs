@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Garage2Grupp5.Data;
 using Garage2Grupp5.Models;
 using Garage2Grupp5.ViewModels;
+using Garage2Grupp5.Services;
 //using AspNetCore;
 
 namespace Garage2Grupp5.Controllers
@@ -33,8 +34,11 @@ namespace Garage2Grupp5.Controllers
         public IActionResult Unpark(/*string LicensePlate, int? Id*/)
         {
             //UnparkedVehicleViewModel theUnparkedVehicleViewModel = new UnparkedVehicleViewModel();
-            var theUnParkedVehicle = _context.UnparkedVehicleViewModel
-                           .First(m => m.LicensePlate == unParkedVehicleLicensePlate/*m => m.Id == theUnparkedVehicleViewModel.Id*/);
+            
+            var theUnParkedVehicle = _context.ParkedVehicleViewModel
+                           .First(m => m.LicensePlate == unParkedVehicleLicensePlate
+                           
+                           /*m => m.Id == theUnparkedVehicleViewModel.Id*/);
             //theUnparkedVehicleViewModel.ArrivalTime = theParkedVehicle.ArrivalTime;
             //theUnparkedVehicleViewModel.Brand = theParkedVehicle.Brand;
             ///*parkedVehicle1.Price = */
@@ -190,7 +194,7 @@ namespace Garage2Grupp5.Controllers
         {
             var model = new ParkedVehicleViewModel/*ParkedVehicle*/
             {
-                ParkedVehicles = await _context.ParkedVehicle.ToListAsync(),/*movies.ToListAsync()*/,
+                ParkedVehicles = await _context.ParkedVehicle.ToListAsync(),/*movies.ToListAsync()*/
                 VehicleTypes = await vehicleTypeSelectListService.GetVehicleTypesAsync() //GetGenresAsync()
             };
             return View(nameof(Index2), model/*await _context.ParkedVehicle.ToListAsync()*/);

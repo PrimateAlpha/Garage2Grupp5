@@ -1,6 +1,7 @@
 ﻿using Garage2Grupp5.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Linq;
 
 namespace Garage2Grupp5.ViewModels
@@ -9,9 +10,9 @@ namespace Garage2Grupp5.ViewModels
     {
         //public ParkedVehicleViewModel() { }
         [Key] public int Id { get; set; }
+        [NotMapped]
 
         public IEnumerable<SelectListItem> VehicleTypes { get; set; } = new List<SelectListItem>();
-
         public IEnumerable<ParkedVehicle> ParkedVehicles { get; set; } = new List<ParkedVehicle>();
 
 
