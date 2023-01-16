@@ -17,7 +17,7 @@ namespace Garage2Grupp5.Data
         }
         public DbSet<ParkedVehicle> ParkedVehicle => Set<ParkedVehicle>();
         public DbSet<VehicleType> VehicleType => Set<VehicleType>();
-        public DbSet<ParkedVehicleViewModel> ParkedVehicleViewModel => Set<ParkedVehicleViewModel>();
+        //public DbSet<ParkedVehicleViewModel> ParkedVehicleViewModel => Set<ParkedVehicleViewModel>();
         public DbSet<Membership> Membership => Set<Membership>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

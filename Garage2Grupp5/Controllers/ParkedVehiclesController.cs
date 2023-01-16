@@ -35,10 +35,10 @@ namespace Garage2Grupp5.Controllers
         {
             //UnparkedVehicleViewModel theUnparkedVehicleViewModel = new UnparkedVehicleViewModel();
             
-            var theUnParkedVehicle = _context.ParkedVehicleViewModel
-                           .First(m => m.LicensePlate == unParkedVehicleLicensePlate
+            //var theUnParkedVehicle = _context.ParkedVehicleViewModel
+                           //.First(m => m.LicensePlate == unParkedVehicleLicensePlate
                            
-                           /*m => m.Id == theUnparkedVehicleViewModel.Id*/);
+                           ///*m => m.Id == theUnparkedVehicleViewModel.Id*/);
             //theUnparkedVehicleViewModel.ArrivalTime = theParkedVehicle.ArrivalTime;
             //theUnparkedVehicleViewModel.Brand = theParkedVehicle.Brand;
             ///*parkedVehicle1.Price = */
@@ -52,7 +52,7 @@ namespace Garage2Grupp5.Controllers
             //theUnparkedVehicleViewModel.NrOfWheels = theParkedVehicle.NrOfWheels;
             //theUnparkedVehicleViewModel.Color = theParkedVehicle.Color;
             //theUnparkedVehicleViewModel.Type = theParkedVehicle.Type;
-            return View(theUnParkedVehicle);
+            return View(/*theUnParkedVehicle*/);
         }
 
         public IActionResult UnPark(/*string LicensePlate, */int? Id, bool receipt)
@@ -194,7 +194,7 @@ namespace Garage2Grupp5.Controllers
         {
             var model = new ParkedVehicleViewModel/*ParkedVehicle*/
             {
-                ParkedVehicles = await _context.ParkedVehicle.ToListAsync(),/*movies.ToListAsync()*/
+                //ParkedVehicles = await _context.ParkedVehicle.ToListAsync(),/*movies.ToListAsync()*/
                 VehicleTypes = await vehicleTypeSelectListService.GetVehicleTypesAsync() //GetGenresAsync()
             };
             return View(nameof(Index2), model/*await _context.ParkedVehicle.ToListAsync()*/);
@@ -218,7 +218,7 @@ namespace Garage2Grupp5.Controllers
 
             var model = new ParkedVehicleViewModel
             {
-                ParkedVehicles = parkedVehicles,
+                //ParkedVehicles = parkedVehicles,
                 VehicleTypes = parkedVehicles.Select(m => m.Type)
                                .Distinct()
                                .Select(g => new SelectListItem

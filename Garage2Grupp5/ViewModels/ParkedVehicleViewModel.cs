@@ -9,11 +9,11 @@ namespace Garage2Grupp5.ViewModels
     public class ParkedVehicleViewModel
     {
         //public ParkedVehicleViewModel() { }
-        [Key] public int Id { get; set; }
-        [NotMapped]
+        //[Key] public int Id { get; set; }
+        //[NotMapped]
 
         public IEnumerable<SelectListItem> VehicleTypes { get; set; } = new List<SelectListItem>();
-        public IEnumerable<ParkedVehicle> ParkedVehicles { get; set; } = new List<ParkedVehicle>();
+        //public IEnumerable<ParkedVehicle> ParkedVehicles { get; set; } = new List<ParkedVehicle>();
 
 
         public int MemberId { get; set; }
@@ -28,7 +28,6 @@ namespace Garage2Grupp5.ViewModels
         //        ErrorMessage = "LicensePlate already exists")]
         public string LicensePlate { get; set; } = string.Empty;
 
-        public VehicleType? Type { get; set; }
         //public VehicleType Type { get; set; }/* = VehicleType.;*/
         public string VehicleType { get; set; } /*= string.Empty;*/
 
