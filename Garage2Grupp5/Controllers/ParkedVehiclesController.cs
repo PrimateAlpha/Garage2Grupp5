@@ -304,7 +304,7 @@ namespace Garage2Grupp5.Controllers
         //}
 
         // GET: ParkedVehicles/Create
-        public IActionResult RegisterVehicle()
+        public IActionResult Create()
         {
             return View();
         }
@@ -339,6 +339,7 @@ namespace Garage2Grupp5.Controllers
                 //
             }
 
+            //_context.ParkedVehicle.
 
             var newVehicle = new RegisteredVehicleViewModel/*ParkedVehicle*/
             {
@@ -356,7 +357,7 @@ namespace Garage2Grupp5.Controllers
                 //VehicleType vehicleType = new VehicleType();
                 //vehicleType.Name = parkedVehicle.Type.ToString();
                 //_context.Add(vehicleType);
-                _context.Add(newVehicle);                
+                _context.Add(registeredVehicle);                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
