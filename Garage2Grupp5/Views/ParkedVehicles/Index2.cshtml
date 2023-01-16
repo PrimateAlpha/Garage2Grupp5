@@ -2,10 +2,10 @@
 
 
 @{
-    ViewData["Title"] = "Index2";
+    ViewData["Title"] = "Select a vehicle type that you want to park";
 }
 
-<h1>Index2</h1>
+<h1>Select a vehicle type that you want to park</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -18,7 +18,7 @@
 *@
         <div class="input-group-append">
             <select class="form-control" asp-for="Type" asp-items="@Model.VehicleTypes">
-                <option selected="selected" value="">Please select</option>
+                <option selected="selected" value="">Please select vehicle type</option>
             </select>
         </div>
         <div class="input-group-append">

@@ -19,6 +19,21 @@ namespace Garage2Grupp5.Data
         public DbSet<VehicleType> VehicleType => Set<VehicleType>();
         public DbSet<ParkedVehicleViewModel> ParkedVehicleViewModel => Set<ParkedVehicleViewModel>();
         public DbSet<Membership> Membership => Set<Membership>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<VehicleType>().HasData(
+                 new VehicleType { Id = 1, Name = "Car"},
+                   new VehicleType { Id = 2, Name = "Motorcycle"},
+                   new VehicleType { Id = 3, Name = "Bus"},
+                   new VehicleType { Id = 4, Name = "Boat"}
+                   
+                );
+        }
+
+
         //public DbSet<Garage2Grupp5.ViewModels.ParkedVehicleViewModel> ParkedVehicleViewModel { get; set; }
         //public DbSet<Garage2Grupp5.Models.Membership> Membership { get; set; }
     }
