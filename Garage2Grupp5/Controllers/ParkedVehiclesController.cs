@@ -304,7 +304,7 @@ namespace Garage2Grupp5.Controllers
         //}
 
         // GET: ParkedVehicles/Create
-        public IActionResult Create()
+        public IActionResult RegisterVehicle()
         {
             return View();
         }
@@ -338,10 +338,15 @@ namespace Garage2Grupp5.Controllers
                 return View("~/Views/ParkedVehicles/LicensePlateAlreadyExistError.cshtml");
             }
 
-            //_context.ParkedVehicle.
 
-            var newVehicle = new RegisteredVehicleViewModel/*ParkedVehicle*/
+            var vehicleType = await _context.VehicleType.FirstOrDefaultAsync(vt => vt.Name == registeredVehicle.VehicleType);
+
+            var newVehicle = new ParkedVehicle/*ParkedVehicle*/
             {
+                LicensePlate = registeredVehicle.LicensePlate,
+                Brand = registeredVehicle.Brand,
+                VehicleTypeId = vehicleType.Id
+
                 //fyll på med resten av properties
                 //Type = vehicleType
                 //LicensePlate = vehicleType.
@@ -356,7 +361,7 @@ namespace Garage2Grupp5.Controllers
                 //VehicleType vehicleType = new VehicleType();
                 //vehicleType.Name = parkedVehicle.Type.ToString();
                 //_context.Add(vehicleType);
-                _context.Add(registeredVehicle);                
+                _context.Add(newVehicle);                
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
