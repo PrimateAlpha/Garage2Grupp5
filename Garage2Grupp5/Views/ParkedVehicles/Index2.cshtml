@@ -10,28 +10,9 @@
 @*    <a asp-action="RegisterVehicle">Register New Vehicle</a>
 *@</p>
 
-@*<p>
-    <a asp-action="RegisterVehicle">Register New Vehicle</a>
-</p>*@
-
-<form asp-action="RegisterVehicle" asp-controller="ParkedVehicles" method="post">
-    <a asp-action="RegisterVehicle">Register New Vehicle</a>
-
-@*    <a asp-action="Create">Register New Vehicle</a>
-*@
-    <div class="input-group mb-3">
-        @*        <input type="text" class="form-control" asp-for="Title" placeholder="Search on title..." />
-        *@
-        @*<div class="input-group-append">
-        <select class="form-control" asp-for="Type" asp-items="@Model.VehicleTypes">
-        <option selected="selected" value="">Please select vehicle type</option>
-        </select>
-        </div>*@
-        @*<div class="input-group-append">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-search">&emsp;Search</i></button>
-        </div>*@
-    </div>
-</form>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
 
 
 <form asp-action="Search" asp-controller="ParkedVehicles" method="get">
