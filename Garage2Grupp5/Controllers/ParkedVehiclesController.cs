@@ -342,16 +342,27 @@ namespace Garage2Grupp5.Controllers
 
             var vehicleType = await _context.VehicleType.FirstOrDefaultAsync(vt => vt.Name == registeredVehicle.VehicleType);
 
+
+
             var newVehicle = new ParkedVehicle/*ParkedVehicle*/
             {
                 LicensePlate = registeredVehicle.LicensePlate,
                 Brand = registeredVehicle.Brand,
                 VehicleTypeId = vehicleType.Id
 
+
+
                 //fyll på med resten av properties
                 //Type = vehicleType
                 //LicensePlate = vehicleType.
             };
+
+            //var newVehicle = new RegisteredVehicleViewModel/*ParkedVehicle*/
+            //{
+            //    //fyll på med resten av properties
+            //    //Type = vehicleType
+            //    //LicensePlate = vehicleType.
+            //};
 
 
             
@@ -366,7 +377,7 @@ namespace Garage2Grupp5.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(newVehicle/*parkedVehicle*/);
+            return View(nameof(Details/*Index*/)/*"Index.cshtml"*/, newVehicle/*parkedVehicle*/);
         }
 
 
