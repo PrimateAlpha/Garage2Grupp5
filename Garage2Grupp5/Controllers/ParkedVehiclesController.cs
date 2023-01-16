@@ -365,7 +365,7 @@ namespace Garage2Grupp5.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(newVehicle/*parkedVehicle*/);
+            return View(nameof(Details/*Index*/)/*"Index.cshtml"*/, newVehicle/*parkedVehicle*/);
         }
 
 
