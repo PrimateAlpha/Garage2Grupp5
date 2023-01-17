@@ -23,7 +23,7 @@ namespace Garage2Grupp5.Controllers
         // GET: Memberships
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Membership.ToListAsync());
+            return View(await _context.Membership.ToListAsync());
         }
 
         // GET: Memberships/Details/5
@@ -57,27 +57,31 @@ namespace Garage2Grupp5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(MembershipViewModel membershipViewModel/*[Bind("Id,SocialSecurityNumber,FirstName,LastName,FullName")] Membership membership*/)
         {
-            var memberFullName = await _context.Membership.FirstOrDefaultAsync(vt => vt.FullName == membershipViewModel.FullName);
-
-            var newMember = new /*RegisteredVehicleViewModel*/Membership
+            if (await _context.Membership.AnyAsync(vt => vt.SocialSecurityNumber == membershipViewModel.SocialSecurityNumber))
             {
-                SocialSecurityNumber = membershipViewModel.SocialSecurityNumber,
-                FirstName = membershipViewModel.FirstName,
-                LastName = membershipViewModel.LastName,
-                Id = memberFullName.Id
-                //FullName = newMemberFullName.FirstName + " " + newMemberFullName
-                //fyll på med resten av properties
-                //Type = vehicleType
-                //LicensePlate = vehicleType.
-            };
+                ModelState.AddModelError("SocialSecurityNumber", "Exists");
+
+            }
 
             if (ModelState.IsValid)
             {
+                var newMember = new Membership
+                {
+                    SocialSecurityNumber = membershipViewModel.SocialSecurityNumber,
+                    FirstName = membershipViewModel.FirstName,
+                    LastName = membershipViewModel.LastName,
+                   // Id = memberFullName.Id
+                    //FullName = newMemberFullName.FirstName + " " + newMemberFullName
+                    //fyll på med resten av properties
+                    //Type = vehicleType
+                    //LicensePlate = vehicleType.
+                };
+
                 _context.Add(newMember);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(newMember);
+            return View(membershipViewModel);
         }
 
         // GET: Memberships/Edit/5
@@ -163,14 +167,14 @@ namespace Garage2Grupp5.Controllers
             {
                 _context.Membership.Remove(membership);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MembershipExists(int id)
         {
-          return _context.Membership.Any(e => e.Id == id);
+            return _context.Membership.Any(e => e.Id == id);
         }
     }
 }

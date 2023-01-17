@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+#nullable disable
 
 namespace Garage2Grupp5.Models
 {
@@ -10,7 +11,7 @@ namespace Garage2Grupp5.Models
         // Nav props
 
         public Membership Membership { get; set; }
-        public VehicleType? Type { get; set; }
+        public VehicleType Type { get; set; }
         //public VehicleType Type { get; set; }/* = VehicleType.;*/
 
         // Foreign Keys
@@ -30,7 +31,7 @@ namespace Garage2Grupp5.Models
         public string LicensePlate { get; set; } = string.Empty;
 
         
-        public string VehicleType { get; set; } /*= string.Empty;*/
+       // public string VehicleType { get; set; } /*= string.Empty;*/
 
 
 

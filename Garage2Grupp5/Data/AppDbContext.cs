@@ -33,7 +33,7 @@ namespace Garage2Grupp5.Data
                 );
 
             modelBuilder.Entity<Membership>().HasData(
-                 new Membership { Id = 1, SocialSecurityNumber = "23409812-32134", FirstName = "Abc", LastName = "Def", FullName = "Abc Def" }
+                 new Membership { Id = 1, SocialSecurityNumber = "23409812-32134", FirstName = "Abc", LastName = "Def" }
                    //new Membership { Id = 2, FullName = "123 934" },
                    //new Membership { Id = 3, FullName = "AFS dfe" },
                    //new Membership { Id = 4, FullName = "s73 fe2" }

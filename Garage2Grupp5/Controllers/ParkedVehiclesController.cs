@@ -15,7 +15,7 @@ namespace Garage2Grupp5.Controllers
 {
     public class ParkedVehiclesController : Controller
     {
-        string unParkedVehicleLicensePlate;
+        string ?unParkedVehicleLicensePlate;
         private readonly AppDbContext _context;
         private readonly IVehicleTypeSelectListService vehicleTypeSelectListService;
 
@@ -194,7 +194,7 @@ namespace Garage2Grupp5.Controllers
         {
             var model = new RegisteredVehicleViewModel/*ParkedVehicle*/
             {
-                //ParkedVehicles = await _context.ParkedVehicle.ToListAsync(),/*movies.ToListAsync()*/
+                ParkedVehicles = await _context.ParkedVehicle.Include(v => v.Type).ToListAsync(),/*movies.ToListAsync()*/
                 VehicleTypes = await vehicleTypeSelectListService.GetVehicleTypesAsync() //GetGenresAsync()
             };
             return View(nameof(Index2), model/*await _context.ParkedVehicle.ToListAsync()*/);
@@ -214,7 +214,7 @@ namespace Garage2Grupp5.Controllers
 
         public async Task<IActionResult> Index2(/*ParkedVehicleViewModel model*/)
         {
-            var parkedVehicles = await _context.ParkedVehicle.ToListAsync();
+            var parkedVehicles = await _context.ParkedVehicle.Include(v => v.Type).ToListAsync();
 
             var model = new RegisteredVehicleViewModel
             {

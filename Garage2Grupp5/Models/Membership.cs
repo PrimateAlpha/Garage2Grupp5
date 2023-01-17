@@ -1,6 +1,6 @@
 ﻿using ActiveLogin.Identity.Swedish.AspNetCore.Validation;
 using System.ComponentModel.DataAnnotations;
-
+#nullable disable
 namespace Garage2Grupp5.Models
 {
     public class Membership
@@ -16,10 +16,10 @@ namespace Garage2Grupp5.Models
         //[PersonalIdentityNumber]
 
         [PersonalIdentityNumber]
-        public string SocialSecurityNumber { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string FullName { get; set; }
+        public string SocialSecurityNumber { get; set; } = string.Empty;
+        public string FirstName { get; set; } = string.Empty;
+        public string LastName { get; set; } = string.Empty;
+        public string FullName => $"{FirstName} {LastName}";
 
 
     }

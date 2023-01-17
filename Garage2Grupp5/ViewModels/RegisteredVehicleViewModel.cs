@@ -13,7 +13,7 @@ namespace Garage2Grupp5.ViewModels
         //[NotMapped]
 
         public IEnumerable<SelectListItem> VehicleTypes { get; set; } = new List<SelectListItem>();
-        //public IEnumerable<ParkedVehicle> ParkedVehicles { get; set; } = new List<ParkedVehicle>();
+        public IEnumerable<ParkedVehicle> ParkedVehicles { get; set; } = new List<ParkedVehicle>();
 
 
         public int MemberId { get; set; }
@@ -29,7 +29,7 @@ namespace Garage2Grupp5.ViewModels
         public string LicensePlate { get; set; } = string.Empty;
 
         //public VehicleType Type { get; set; }/* = VehicleType.;*/
-        public string VehicleType { get; set; } /*= string.Empty;*/
+        public string VehicleType { get; set; } = string.Empty;
 
         public int MemberFullName { get; set; }
 
