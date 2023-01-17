@@ -59,7 +59,7 @@ namespace Garage2Grupp5.Controllers
         {
             var memberFullName = await _context.Membership.FirstOrDefaultAsync(vt => vt.FullName == membershipViewModel.FullName);
 
-            var newMemberFullName = new /*RegisteredVehicleViewModel*/Membership
+            var newMember = new /*RegisteredVehicleViewModel*/Membership
             {
                 SocialSecurityNumber = membershipViewModel.SocialSecurityNumber,
                 FirstName = membershipViewModel.FirstName,
@@ -73,11 +73,11 @@ namespace Garage2Grupp5.Controllers
 
             if (ModelState.IsValid)
             {
-                _context.Add(membership);
+                _context.Add(newMember);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(membership);
+            return View(newMember);
         }
 
         // GET: Memberships/Edit/5
