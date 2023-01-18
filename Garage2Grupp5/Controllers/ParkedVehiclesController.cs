@@ -440,13 +440,14 @@ namespace Garage2Grupp5.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(EditViewModel editViewModel/*int id, [Bind("Id,LicensePlate,Type,NrOfWheels,Color,Brand,ArrivalTime")] ParkedVehicle parkedVehicle*/)
+        public async Task<IActionResult> Edit(EditViewModel editViewModel, int id/*int id, [Bind("Id,LicensePlate,Type,NrOfWheels,Color,Brand,ArrivalTime")] ParkedVehicle parkedVehicle*/)
         {
             //if (id != parkedVehicle.Id)
             //{
             //    return NotFound();
             //}
             ParkedVehicle parkedVehicle = new ParkedVehicle();
+            parkedVehicle.Id = id;
             parkedVehicle.Brand = editViewModel.Brand;
             parkedVehicle.Color = editViewModel.Color;
             parkedVehicle.MembershipId = editViewModel.MemberId;
