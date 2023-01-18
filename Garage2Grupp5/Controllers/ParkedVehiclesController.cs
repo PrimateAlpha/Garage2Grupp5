@@ -323,62 +323,89 @@ namespace Garage2Grupp5.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterVehicle(RegisteredVehicleViewModel registeredVehicle/*ParkedVehicle parkedVehicle*/)
         {
+            if (await _context.ParkedVehicle.AnyAsync(vt => vt.LicensePlate == registeredVehicle.LicensePlate))
+            {
+                ModelState.AddModelError("LicensePlate", "Exists");
+
+            }
+
+            if (ModelState.IsValid)
+            {
+                var newMember = new ParkedVehicle
+                {
+                    LicensePlate = registeredVehicle.LicensePlate,
+                    Brand = registeredVehicle.Brand,
+                    Color = registeredVehicle.Color
+                    // Id = memberFullName.Id
+                    //FullName = newMemberFullName.FirstName + " " + newMemberFullName
+                    //fyll på med resten av properties
+                    //Type = vehicleType
+                    //LicensePlate = vehicleType.
+                };
+
+                _context.Add(newMember);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(registeredVehicle);
+
+        }
             //BYt ut agrumentet till en Vymodell
 
 
             //var parkedVehicle1 = _context.ParkedVehicle.Find(parkedVehicle.LicensePlate);
-            var parkedVehicle1 = _context.ParkedVehicle.FirstOrDefault(acc => acc.LicensePlate == registeredVehicle.LicensePlate);
-            //var vehicleType = _context.VehicleType.FirstOrDefault(acc => acc.Name == parkedVehicle.VehicleType); //
-            //_context.ParkedVehicle.
-            //var movies = parkedVehicle.VehicleType is null ?
-            //                    movies :
-            //                    movies.Where(m => m.VehicleType == parkedVehicle.VehicleType);
-            if (parkedVehicle1 != null)
-            {
-                return View("~/Views/ParkedVehicles/LicensePlateAlreadyExistError.cshtml");
-                //
-            }
+        //    var parkedVehicle1 = _context.ParkedVehicle.FirstOrDefault(acc => acc.LicensePlate == registeredVehicle.LicensePlate);
+        //    //var vehicleType = _context.VehicleType.FirstOrDefault(acc => acc.Name == parkedVehicle.VehicleType); //
+        //    //_context.ParkedVehicle.
+        //    //var movies = parkedVehicle.VehicleType is null ?
+        //    //                    movies :
+        //    //                    movies.Where(m => m.VehicleType == parkedVehicle.VehicleType);
+        //    if (parkedVehicle1 != null)
+        //    {
+        //        return View("~/Views/ParkedVehicles/LicensePlateAlreadyExistError.cshtml");
+        //        //
+        //    }
 
 
-            var vehicleType = await _context.VehicleType.FirstOrDefaultAsync(vt => vt.Name == registeredVehicle.VehicleType);
-
-
-
-            var newVehicle = new ParkedVehicle/*ParkedVehicle*/
-            {
-                LicensePlate = registeredVehicle.LicensePlate,
-                Brand = registeredVehicle.Brand,
-                VehicleTypeId = vehicleType.Id
+        //    var vehicleType = await _context.VehicleType.FirstOrDefaultAsync(vt => vt.Name == registeredVehicle.VehicleType);
 
 
 
-                //fyll på med resten av properties
-                //Type = vehicleType
-                //LicensePlate = vehicleType.
-            };
+        //    var newVehicle = new ParkedVehicle/*ParkedVehicle*/
+        //    {
+        //        LicensePlate = registeredVehicle.LicensePlate,
+        //        Brand = registeredVehicle.Brand,
+        //        //VehicleTypeId = vehicleType.Id
 
-            //var newVehicle = new RegisteredVehicleViewModel/*ParkedVehicle*/
-            //{
-            //    //fyll på med resten av properties
-            //    //Type = vehicleType
-            //    //LicensePlate = vehicleType.
-            //};
+
+
+        //        //fyll på med resten av properties
+        //        //Type = vehicleType
+        //        //LicensePlate = vehicleType.
+        //    };
+
+        //    //var newVehicle = new RegisteredVehicleViewModel/*ParkedVehicle*/
+        //    //{
+        //    //    //fyll på med resten av properties
+        //    //    //Type = vehicleType
+        //    //    //LicensePlate = vehicleType.
+        //    //};
 
 
             
 
            
-            if (ModelState.IsValid)
-            {
-                //VehicleType vehicleType = new VehicleType();
-                //vehicleType.Name = parkedVehicle.Type.ToString();
-                //_context.Add(vehicleType);
-                _context.Add(newVehicle);                
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(nameof(Details/*Index*/)/*"Index.cshtml"*/, newVehicle/*parkedVehicle*/);
-        }
+        //    if (ModelState.IsValid)
+        //    {
+        //        //VehicleType vehicleType = new VehicleType();
+        //        //vehicleType.Name = parkedVehicle.Type.ToString();
+        //        //_context.Add(vehicleType);
+        //        _context.Add(newVehicle);                
+        //        await _context.SaveChangesAsync();
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    return View(nameof(Details/*Index*/)/*"Index.cshtml"*/, newVehicle/*parkedVehicle*/);
+        //}
 
 
 
