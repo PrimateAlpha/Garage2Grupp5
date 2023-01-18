@@ -16,7 +16,7 @@ namespace Garage2Grupp5.ViewModels
         public IEnumerable<ParkedVehicle> ParkedVehicles { get; set; } = new List<ParkedVehicle>();
 
 
-        public int MemberId { get; set; }
+        public int MemberId { get; set; } /*= string.Empty;*/
 
         [Required]
         [Display(Name = "LicensePlate")]
@@ -30,6 +30,7 @@ namespace Garage2Grupp5.ViewModels
 
         //public VehicleType Type { get; set; }/* = VehicleType.;*/
         public string VehicleType { get; set; } = string.Empty;
+        public int VehicleTypeId { get; set; } 
 
         public int MemberFullName { get; set; }
 

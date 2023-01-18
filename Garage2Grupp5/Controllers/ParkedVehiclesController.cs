@@ -15,7 +15,7 @@ namespace Garage2Grupp5.Controllers
 {
     public class ParkedVehiclesController : Controller
     {
-        string ?unParkedVehicleLicensePlate;
+        string? unParkedVehicleLicensePlate;
         private readonly AppDbContext _context;
         private readonly IVehicleTypeSelectListService vehicleTypeSelectListService;
 
@@ -34,11 +34,11 @@ namespace Garage2Grupp5.Controllers
         public IActionResult Unpark(/*string LicensePlate, int? Id*/)
         {
             //UnparkedVehicleViewModel theUnparkedVehicleViewModel = new UnparkedVehicleViewModel();
-            
+
             //var theUnParkedVehicle = _context.ParkedVehicleViewModel
-                           //.First(m => m.LicensePlate == unParkedVehicleLicensePlate
-                           
-                           ///*m => m.Id == theUnparkedVehicleViewModel.Id*/);
+            //.First(m => m.LicensePlate == unParkedVehicleLicensePlate
+
+            ///*m => m.Id == theUnparkedVehicleViewModel.Id*/);
             //theUnparkedVehicleViewModel.ArrivalTime = theParkedVehicle.ArrivalTime;
             //theUnparkedVehicleViewModel.Brand = theParkedVehicle.Brand;
             ///*parkedVehicle1.Price = */
@@ -106,7 +106,7 @@ namespace Garage2Grupp5.Controllers
             //return RedirectToAction(nameof(ParkingReceipt/*Index*/));
             if (receipt)
             {
-            return View("ParkingReceipt", unparkedVehicleViewModel);
+                return View("ParkingReceipt", unparkedVehicleViewModel);
 
             }
             else
@@ -115,7 +115,7 @@ namespace Garage2Grupp5.Controllers
             }
         }
 
-            public IActionResult NoReceipt(string LicensePlate, int? Id)
+        public IActionResult NoReceipt(string LicensePlate, int? Id)
         {
             if (Id == null || _context.ParkedVehicle == null)
             {
@@ -136,8 +136,8 @@ namespace Garage2Grupp5.Controllers
 
             if (parkedVehicle1 != null)
             {
-                
-                
+
+
                 _context.ParkedVehicle.Remove(parkedVehicle1);
             }
 
@@ -194,7 +194,7 @@ namespace Garage2Grupp5.Controllers
         {
             var model = new RegisteredVehicleViewModel/*ParkedVehicle*/
             {
-                ParkedVehicles = await _context.ParkedVehicle.Include(v => v.Type).ToListAsync(),/*movies.ToListAsync()*/
+                ParkedVehicles = await _context.ParkedVehicle.Include(v => v.Type).Include(v => v.Membership).ToListAsync(),/*movies.ToListAsync()*/
                 VehicleTypes = await vehicleTypeSelectListService.GetVehicleTypesAsync() //GetGenresAsync()
             };
             return View(nameof(Index2), model/*await _context.ParkedVehicle.ToListAsync()*/);
@@ -325,35 +325,34 @@ namespace Garage2Grupp5.Controllers
         {
             if (await _context.ParkedVehicle.AnyAsync(vt => vt.LicensePlate == registeredVehicle.LicensePlate))
             {
-                ModelState.AddModelError("LicensePlate", "Exists");
+                ModelState.AddModelError("LicensePlate", "Licensplate already exists");
 
             }
 
             if (ModelState.IsValid)
             {
-                var newMember = new ParkedVehicle
+                var newVehicle = new ParkedVehicle
                 {
                     LicensePlate = registeredVehicle.LicensePlate,
                     Brand = registeredVehicle.Brand,
-                    Color = registeredVehicle.Color
-                    // Id = memberFullName.Id
-                    //FullName = newMemberFullName.FirstName + " " + newMemberFullName
-                    //fyll på med resten av properties
-                    //Type = vehicleType
-                    //LicensePlate = vehicleType.
+                    Color = registeredVehicle.Color,
+                    ArrivalTime = DateTime.Now,
+                    NrOfWheels = registeredVehicle.NrOfWheels,
+                    MembershipId = registeredVehicle.MemberId,
+                    VehicleTypeId = registeredVehicle.VehicleTypeId
                 };
 
-                _context.Add(newMember);
+                _context.Add(newVehicle);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(registeredVehicle);
 
         }
-            //BYt ut agrumentet till en Vymodell
+        //BYt ut agrumentet till en Vymodell
 
 
-            //var parkedVehicle1 = _context.ParkedVehicle.Find(parkedVehicle.LicensePlate);
+        //var parkedVehicle1 = _context.ParkedVehicle.Find(parkedVehicle.LicensePlate);
         //    var parkedVehicle1 = _context.ParkedVehicle.FirstOrDefault(acc => acc.LicensePlate == registeredVehicle.LicensePlate);
         //    //var vehicleType = _context.VehicleType.FirstOrDefault(acc => acc.Name == parkedVehicle.VehicleType); //
         //    //_context.ParkedVehicle.
@@ -392,9 +391,9 @@ namespace Garage2Grupp5.Controllers
         //    //};
 
 
-            
 
-           
+
+
         //    if (ModelState.IsValid)
         //    {
         //        //VehicleType vehicleType = new VehicleType();
@@ -495,14 +494,14 @@ namespace Garage2Grupp5.Controllers
             {
                 _context.ParkedVehicle.Remove(parkedVehicle);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ParkedVehicleExists(int id)
         {
-          return _context.ParkedVehicle.Any(e => e.Id == id);
+            return _context.ParkedVehicle.Any(e => e.Id == id);
         }
     }
 }

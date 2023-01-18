@@ -20,7 +20,7 @@ namespace Garage2Grupp5.Services
                                 .Select(g => new SelectListItem
                                 {
                                     Text = g.FullName.ToString(),
-                                    Value = g.FullName.ToString()
+                                    Value = g.Id.ToString()
                                 })
                                 .ToListAsync();
         }
