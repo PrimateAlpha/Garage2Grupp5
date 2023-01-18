@@ -424,7 +424,15 @@ namespace Garage2Grupp5.Controllers
             {
                 return NotFound();
             }
-            return View(parkedVehicle);
+            EditViewModel theEditViewModel = new EditViewModel();
+            theEditViewModel.Brand = parkedVehicle.Brand;
+            theEditViewModel.Color = parkedVehicle.Color;
+            theEditViewModel.MemberId = parkedVehicle.MembershipId;
+            theEditViewModel.LicensePlate = parkedVehicle.LicensePlate;
+            theEditViewModel.NrOfWheels = parkedVehicle.NrOfWheels;
+            theEditViewModel.VehicleTypeId = parkedVehicle.VehicleTypeId;
+
+            return View(theEditViewModel/*parkedVehicle*/);
         }
 
         // POST: ParkedVehicles1/Edit/5
@@ -432,34 +440,41 @@ namespace Garage2Grupp5.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,LicensePlate,Type,NrOfWheels,Color,Brand,ArrivalTime")] ParkedVehicle parkedVehicle)
+        public async Task<IActionResult> Edit(EditViewModel editViewModel/*int id, [Bind("Id,LicensePlate,Type,NrOfWheels,Color,Brand,ArrivalTime")] ParkedVehicle parkedVehicle*/)
         {
-            if (id != parkedVehicle.Id)
-            {
-                return NotFound();
-            }
+            //if (id != parkedVehicle.Id)
+            //{
+            //    return NotFound();
+            //}
+            ParkedVehicle parkedVehicle = new ParkedVehicle();
+            parkedVehicle.Brand = editViewModel.Brand;
+            parkedVehicle.Color = editViewModel.Color;
+            parkedVehicle.MembershipId = editViewModel.MemberId;
+            parkedVehicle.LicensePlate = editViewModel.LicensePlate;
+            parkedVehicle.NrOfWheels = editViewModel.NrOfWheels;
+            parkedVehicle.VehicleTypeId = editViewModel.VehicleTypeId;
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(parkedVehicle);
+                //try
+                //{
+                    _context.Update(parkedVehicle/*editViewModel*/);
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ParkedVehicleExists(parkedVehicle.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                //}
+                //catch (DbUpdateConcurrencyException)
+                //{
+                //    if (!ParkedVehicleExists(parkedVehicle.Id))
+                //    {
+                //        return NotFound();
+                //    }
+                //    else
+                //    {
+                //        throw;
+                //    }
+                //}
                 return RedirectToAction(nameof(Index));
             }
-            return View(parkedVehicle);
+            return View(editViewModel);
         }
 
         // GET: ParkedVehicles1/Delete/5

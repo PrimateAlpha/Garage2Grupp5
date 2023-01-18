@@ -1,4 +1,12 @@
-﻿@model Garage2Grupp5.Models.ParkedVehicle
+﻿@*@model Garage2Grupp5.Models.ParkedVehicle*@
+@model Garage2Grupp5.ViewModels.EditViewModel
+
+@*@model Garage2Grupp5.ViewModels.RegisteredVehicleViewModel
+*@@*@model Garage2Grupp5.Models.ParkedVehicle
+*@@*@model Garage2Grupp5.Models.VehicleType
+*@
+@inject IVehicleTypeSelectListService VehicleTypeSelectListService
+@inject IMemberFullNameService MemberFullNameService
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,17 +20,34 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
+@*            <input type="hidden" asp-for="Id" />
+*@            <div class="form-group">
                 <label asp-for="LicensePlate" class="control-label"></label>
                 <input asp-for="LicensePlate" class="form-control" />
                 <span asp-validation-for="LicensePlate" class="text-danger"></span>
             </div>
-            <div class="form-group">
+           @* <div class="form-group">
                 <label asp-for="Type" class="control-label"></label>
 @*                <select asp-for="Type" asp-items="@Html.GetEnumSelectList<VehicleType>()" class="form-control"></select>
-                *@                <span asp-validation-for="Type" class="text-danger"></span>
+                                <span asp-validation-for="Type" class="text-danger"></span>
+            </div>*@
+
+            <div class="input-group-append">
+                <label asp-for="MemberId" class="control-label"></label>
+                <select class="form-control" asp-for="MemberId" asp-items="@await MemberFullNameService.GetMemberFullNamesAsync()">
+                    <option selected="selected" value="">Please select your full name</option>
+                </select>
+                <span asp-validation-for="MemberId" class="text-danger"></span>
             </div>
+
+            <div class="input-group-append">
+                <label asp-for="VehicleTypeId" class="control-label"></label>
+                <select class="form-control" asp-for="VehicleTypeId" asp-items="@await VehicleTypeSelectListService.GetVehicleTypesAsync()">
+                    <option selected="selected" value="">Please select vehicle type</option>
+                </select>
+                <span asp-validation-for="VehicleTypeId" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="NrOfWheels" class="control-label"></label>
                 <input asp-for="NrOfWheels" class="form-control" />
