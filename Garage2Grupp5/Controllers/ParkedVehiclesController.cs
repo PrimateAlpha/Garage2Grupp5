@@ -309,10 +309,30 @@ namespace Garage2Grupp5.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Search(SearchViewModel search/*ParkedVehicle parkedVehicle*/)
+        public async Task<IActionResult> Search(string searchWord /*ParkedVehicle parkedVehicle*/)
         {
+            //var resList = new List<ParkedVehicle>();
+            //foreach(var v in _context.ParkedVehicle)
+            //{
+            //    if (v.LicensePlate.StartsWith(searchWord))
+            //    {
+            //        resList.Add(v);
 
-            return View(search);
+            //    }
+            //}
+
+            //Add logic
+            IQueryable<ParkedVehicle> vehicles = _context.ParkedVehicle;
+
+            if(!string.IsNullOrWhiteSpace(searchWord))
+           vehicles = vehicles.Where(v => v.LicensePlate.StartsWith(searchWord));
+
+            var model = new RegisteredVehicleViewModel
+            {
+                ParkedVehicles =vehicles
+            };
+
+            return View("Index2", model);
 
         }
 
