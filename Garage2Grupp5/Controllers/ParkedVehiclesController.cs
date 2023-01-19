@@ -325,7 +325,7 @@ namespace Garage2Grupp5.Controllers
             IQueryable<ParkedVehicle> vehicles = _context.ParkedVehicle;
 
             if(!string.IsNullOrWhiteSpace(searchWord))
-           vehicles = vehicles.Where(v => v.LicensePlate.StartsWith(searchWord));
+           //vehicles = vehicles.Where(v => v.LicensePlate.StartsWith(searchWord));
             //19.1.2023. Attila Starkenius trying to add
             //function to search even other things than license plate:
             //vehicles = vehicles.Where(v => (v.LicensePlate.StartsWith(searchWord)
