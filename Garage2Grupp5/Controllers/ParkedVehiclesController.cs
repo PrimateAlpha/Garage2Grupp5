@@ -309,7 +309,7 @@ namespace Garage2Grupp5.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Search(string searchWord /*ParkedVehicle parkedVehicle*/)
+        public async Task<IActionResult> Search(string searchWord, int? vehicleType /*ParkedVehicle parkedVehicle*/)
         {
             //var resList = new List<ParkedVehicle>();
             //foreach(var v in _context.ParkedVehicle)
@@ -322,23 +322,25 @@ namespace Garage2Grupp5.Controllers
             //}
 
             //Add logic
-            IQueryable<ParkedVehicle> vehicles = _context.ParkedVehicle;
+            IQueryable<ParkedVehicle> vehicles = _context.ParkedVehicle.Include(v => v.Type);
 
-            if(!string.IsNullOrWhiteSpace(searchWord))
-           //vehicles = vehicles.Where(v => v.LicensePlate.StartsWith(searchWord));
-            //19.1.2023. Attila Starkenius trying to add
-            //function to search even other things than license plate:
-            //vehicles = vehicles.Where(v => (v.LicensePlate.StartsWith(searchWord)
-            //|| v.Brand.StartsWith(searchWord) || v.Color.StartsWith(searchWord)));
-            vehicles = vehicles.Where(v => (v.LicensePlate.StartsWith(searchWord)
-            || v.Brand.StartsWith(searchWord) || v.Color.StartsWith(searchWord)));
-            
+            if (!string.IsNullOrWhiteSpace(searchWord))
+            {
 
+                vehicles = vehicles.Where(v => (v.LicensePlate.StartsWith(searchWord)
+                || v.Brand.StartsWith(searchWord) || v.Color.StartsWith(searchWord)));
+
+            }
+
+            if (vehicleType is not null)
+            {
+                vehicles = vehicles.Where(v => v.VehicleTypeId == vehicleType);
+            }
 
 
             var model = new RegisteredVehicleViewModel
             {
-                ParkedVehicles =vehicles
+                ParkedVehicles = await vehicles.ToListAsync()
             };
 
             return View("Index2", model);
@@ -488,8 +490,8 @@ namespace Garage2Grupp5.Controllers
             {
                 //try
                 //{
-                    _context.Update(parkedVehicle/*editViewModel*/);
-                    await _context.SaveChangesAsync();
+                _context.Update(parkedVehicle/*editViewModel*/);
+                await _context.SaveChangesAsync();
                 //}
                 //catch (DbUpdateConcurrencyException)
                 //{
